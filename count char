@@ -1,0 +1,16 @@
+%{
+#include<stdio.h>
+int noOfchar=0;
+%}
+
+%%
+. {noOfchar++;}
+"\n" {}
+%%
+int yywrap(){
+return 1;
+}
+int main(){
+yylex();
+printf("No of characters %d",noOfchar);
+}
