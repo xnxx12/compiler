@@ -1,0 +1,24 @@
+%{
+#include<stdio.h>
+#include<math.h>
+int num=0;
+%}
+
+%%
+[0-9] {num = num*10 + (*yytext)-'0';}
+"\n" {return 0;}
+%%
+
+int yywrap(){
+return 0;
+}
+
+int main(){
+yylex();
+int x=0;
+for(x;x<num;x++){
+if(x*x>=num) break;
+}
+if(x*x==num) {printf("%d is perfect square",num);}
+else printf("%d is not perfect square",num);
+}
