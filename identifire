@@ -1,0 +1,22 @@
+%{
+#include<stdio.h>
+int f=0;
+%}
+
+%%
+[a-zA-Z]+ {f=1;}
+"_" {f=1;}
+[0-9] {if(f==0){return 0;}}
+"\n" {return 0;}
+. {f=0;return 0;}
+%%
+
+int yywrap(){
+return 1;
+}
+
+int main(){
+yylex();
+if(f) printf("valid");
+else printf("Invalid");
+}
